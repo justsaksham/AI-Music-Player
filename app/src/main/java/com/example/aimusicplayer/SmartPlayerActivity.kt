@@ -24,6 +24,7 @@ import java.util.*
 
 class SmartPlayerActivity : AppCompatActivity() {
     lateinit var parentRelativeLayout: RelativeLayout
+   // var m=MediaPlayer();
     lateinit var speechRecognizer: SpeechRecognizer
     lateinit var speechRecognizerIntent: Intent
     var keeper=""
@@ -199,8 +200,7 @@ class SmartPlayerActivity : AppCompatActivity() {
             myMediaPlayer!!.release()
             Toast.makeText(this,"hhdkjsh",Toast.LENGTH_LONG).show()
         }
-
-        myMediaPlayer = MediaPlayer.create(this@SmartPlayerActivity,uri)
+    myMediaPlayer=(applicationContext as MyApplicationClass).getMediaPlayer(this@SmartPlayerActivity,uri)!!
         myMediaPlayer.start()
     }
 
@@ -211,8 +211,8 @@ class SmartPlayerActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        myMediaPlayer.stop()
-        myMediaPlayer.release()
+//        myMediaPlayer.stop()
+//        myMediaPlayer.release()
 
         super.onDestroy()
     }
@@ -229,12 +229,14 @@ class SmartPlayerActivity : AppCompatActivity() {
         }
     }
     fun playNextSong(){
-        myMediaPlayer.stop()
-        myMediaPlayer.stop()
-        myMediaPlayer.release()
+//        myMediaPlayer.stop()
+//        myMediaPlayer.stop()
+       // myMediaPlayer.release()
         position=(position+1)%mysongs.size
         val uri =Uri.parse(mysongs.get(position).toString())
-        myMediaPlayer=MediaPlayer.create(this@SmartPlayerActivity,uri)
+       // myMediaPlayer=MediaPlayer.create(this@SmartPlayerActivity,uri)
+        myMediaPlayer=(applicationContext as MyApplicationClass).getMediaPlayer(this@SmartPlayerActivity,uri)!!
+
         mSongName=mysongs.get(position).toString()
         songName.text=mSongName
         myMediaPlayer.start()
@@ -252,9 +254,9 @@ class SmartPlayerActivity : AppCompatActivity() {
         }
     }
     fun playPreviousSong(){
-        myMediaPlayer.stop()
-        myMediaPlayer.stop()
-        myMediaPlayer.release()
+//        myMediaPlayer.stop()
+//        myMediaPlayer.stop()
+    //    myMediaPlayer.release()
         if((position-1)<0){
             position=mysongs.size-1
         }
@@ -262,7 +264,8 @@ class SmartPlayerActivity : AppCompatActivity() {
             position=position-1
         }
         val uri =Uri.parse(mysongs.get(position).toString())
-        myMediaPlayer=MediaPlayer.create(this@SmartPlayerActivity,uri)
+    //    myMediaPlayer=MediaPlayer.create(this@SmartPlayerActivity,uri)
+        myMediaPlayer=(applicationContext as MyApplicationClass).getMediaPlayer(this@SmartPlayerActivity,uri)!!
 
 
         mSongName=mysongs.get(position).toString()

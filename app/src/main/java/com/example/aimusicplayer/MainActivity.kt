@@ -2,6 +2,7 @@ package com.example.aimusicplayer
 
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -9,6 +10,7 @@ import android.provider.MediaStore
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -26,7 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         songList=findViewById(R.id.songList)
         appExternalStoragePermission()
-
+        getPermission()
+    }
+    fun getPermission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO),1)
     }
     fun appExternalStoragePermission(){
       // Dexter(this@MainActivity).withPermission()
@@ -93,9 +99,6 @@ class MainActivity : AppCompatActivity() {
         songList.adapter=adapter
         val mediaPlayer=MediaPlayer()
         songList.setOnItemClickListener{adapterView ,view,i,j ->
-//            AdapterView.OnItemClickListener(){ adapterView,view,i,j ->
-//
-//            }
             val songName=songList.getItemAtPosition(i).toString()
             val intent = Intent(this@MainActivity,SmartPlayerActivity::class.java)
 

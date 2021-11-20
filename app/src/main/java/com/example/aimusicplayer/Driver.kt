@@ -23,10 +23,5 @@ class Driver {
         return mediaPlayer
    }
     }
-//   object{} var mediaPlayer:MediaPlayer? =null
-//    fun getmediaPlayer(context:Context):MediaPlayer?{
-//
-//        return mediaPlayer
-//    }
 
 }
